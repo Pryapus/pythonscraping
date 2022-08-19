@@ -4,7 +4,7 @@ import re
 from bs4 import BeautifulSoup
 
 
-domain = "https://www.nutrimuscle.com"
+domain = "https://nutrimuscle.com"
 html = requests.get(domain)
 
 soup = BeautifulSoup(html.text, "html.parser")
