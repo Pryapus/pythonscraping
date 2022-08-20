@@ -1,7 +1,7 @@
 import requests
 import re
 import json
-
+from flatten_json import flatten
 from bs4 import BeautifulSoup
 
 #Domains to use
@@ -13,6 +13,7 @@ domain = snocks
 html = requests.get(domain)
 
 soup = BeautifulSoup(html.text, "html.parser")
+
 soupstr = str(soup)
 
 # JSON = re.compile('Kameleoon.Internals = ({.*?}\)\(\));', re.DOTALL)
@@ -28,4 +29,9 @@ append = matches.group(1) + TwoBrackets
 JsonSoup = json.loads(append)
 Configuration = JsonSoup["configuration"]
 Experiments = Configuration["experiments"]
+
 print(Experiments)
+# Format into a dict and flatten it
+    #for ExperimentData in Experiments:
+    #Expsdict = dict.fromkeys(ExperimentData)
+    #print(Expsdict)
