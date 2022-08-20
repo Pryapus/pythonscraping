@@ -18,10 +18,7 @@ def getKameleoonScriptSrc(domain):
         # Everything I tried :D
         kameleeonScript = kameleoonRegex.findall(javascript)
         if kameleeonScript:
-            print(addhttps + kameleeonScript[0])
+            return(addhttps + kameleeonScript[0])
 
 
 
-
-
-getKameleoonScriptSrc('https://nutrimuscle.com')
