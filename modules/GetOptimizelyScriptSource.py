@@ -18,9 +18,3 @@ def getOptimizelyScriptSrc(domain):
         OptimizelyScript = OptimizelyRegex.findall(javascript)
         if OptimizelyScript:
             print(addhttps + OptimizelyScript[0])
-
-
-
-
-
-getOptimizelyScriptSrc('https://smiledirectclub.com/')
