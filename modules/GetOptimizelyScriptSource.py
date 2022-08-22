@@ -12,7 +12,7 @@ def getOptimizelyScriptSrc(domain):
         # Otherwise assume that the javascript is contained within the tags
         else:
             javascript = ''
-        OptimizelyRegex = re.compile(r'cdn.optimizely.com\/js\/.*.js')
+        OptimizelyRegex = re.compile(r'cdn.*.optimizely.com\/js\/.*.js')
         addhttps = 'https://'
         # Everything I tried :D
         OptimizelyScript = OptimizelyRegex.findall(javascript)

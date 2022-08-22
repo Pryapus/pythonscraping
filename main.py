@@ -1,3 +1,8 @@
-from modules.GetKameleoonScriptSource import *
+from modules.GetScriptSrc import *
 
-print(getKameleoonScriptSrc("https://nutrimuscle.com"))
+
+brandlist = ['https://snocks.com', 'https://buah.de', 'https://bitterliebe.com', 'https://hugoboss.com','https://www.piquelife.com/']
+
+
+for x in brandlist:
+    getScriptSrc(x)

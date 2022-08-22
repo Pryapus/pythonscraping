@@ -28,9 +28,9 @@ append = matches.group(1) + TwoBrackets
 
 JsonSoup = json.loads(append)
 Configuration = JsonSoup["configuration"]
-Experiments = Configuration["experiments"]
+Personalizations = Configuration["personalizations"]
 
-print(Experiments)
+print(Configuration)
 # Format into a dict and flatten it
     #for ExperimentData in Experiments:
     #Expsdict = dict.fromkeys(ExperimentData)

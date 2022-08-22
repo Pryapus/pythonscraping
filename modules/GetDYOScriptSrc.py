@@ -13,16 +13,10 @@ def getDYOScriptSrc(domain):
         else:
             javascript = ''
         
-        DYORegex = re.compile(r'cdn.dynamicyield.com\/api\/.*.api_dynamic.js')
+        DYORegex = re.compile(r'cdn.*.dynamicyield.com\/api\/.*.api_dynamic.js')
         addhttps = 'https://'
         # Everything I tried :D
         DYOScript = DYORegex.findall(javascript)
         if DYOScript:
             print(addhttps + DYOScript[0])
-
-        print(soup)
         
-        
-
-
-print(getDYOScriptSrc("https://www.hugoboss.com/"))
