@@ -1,7 +1,7 @@
 import requests
 import re
 import json
-from flatten_json import flatten
+#from flatten_json import flatten
 from bs4 import BeautifulSoup
 
 #Domains to use
@@ -30,7 +30,6 @@ JsonSoup = json.loads(append)
 Configuration = JsonSoup["configuration"]
 Personalizations = Configuration["personalizations"]
 
-print(Configuration)
 # Format into a dict and flatten it
     #for ExperimentData in Experiments:
     #Expsdict = dict.fromkeys(ExperimentData)
