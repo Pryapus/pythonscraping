@@ -26,7 +26,10 @@ def getScriptSrc(domain):
                 javascript = ''
             thislist = [r'try.abtasty.com\/.*.js', r'cdn.*.optimizely.com\/js\/.*.js', r'optimize\.js\?id=.{11}', r'[\w].*kameleoon.js', r'cdn.*.dynamicyield.com\/api\/.*.api_dynamic.js', r'cdn.*.optimizely.com\/js\/.*.js', r'cdn.*.convertexperiments.com\/js\/.*.js']
             for x in thislist:
-                extractFromRegex(x, javascript)
+                if extractFromRegex(x, javascript):
+                    result = extractFromRegex(x, javascript)
+                    return result
+            
 
 def extractFromRegex(regex, javascript):
     SrcRegex = re.compile(regex, re.DOTALL)
@@ -34,8 +37,8 @@ def extractFromRegex(regex, javascript):
     ScriptList = []
     OptimizelyScript = SrcRegex.findall(javascript)
     if OptimizelyScript:
-        print("found script: " +addhttps + OptimizelyScript[0])
-    
+        result = addhttps + OptimizelyScript[0]
+        return result
     
 
 
