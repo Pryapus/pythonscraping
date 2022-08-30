@@ -3,27 +3,31 @@ import re
 from bs4 import BeautifulSoup
 from urllib.error import HTTPError
 import csv  
+from tools.requestandparse import *
 
 def getScriptSrc(domain):
 
 
-    headers = {"User-Agent": "Mozilla/5.0"}
-    html = requests.get(domain, headers=headers)
+    # headers = {"User-Agent": "Mozilla/5.0"}
+    # html = requests.get(domain, headers=headers)
     
-    data = [domain, "HTTP Response:", str(html.status_code)]
-    with open('logs/logs.csv', 'a', encoding='UTF8', newline='') as f:
-        writer = csv.writer(f)
-        writer.writerow(data)
+    # data = [domain, "HTTP Response:", str(html.status_code)]
+    # with open('logs/logs.csv', 'a', encoding='UTF8', newline='') as f:
+    #     writer = csv.writer(f)
+    #     writer.writerow(data)
 
-    # try:
-    #     #html = requests.get(domain, headers=headers)
-    #     html.raise_for_status()
-    # except HTTPError as hp:
-    #     print(hp)
+    # # try:
+    # #     #html = requests.get(domain, headers=headers)
+    # #     html.raise_for_status()
+    # # except HTTPError as hp:
+    # #     print(hp)
         
         
     
-    soup = BeautifulSoup(html.text, "html.parser")
+    # soup = BeautifulSoup(html.text, "html.parser")
+    soup = requestAndParse(domain)[0]
+
+
     # Find all script tags
     for n in soup.find_all('script'):
         # Check if the src attribute exists, and if it does grab the source URL

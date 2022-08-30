@@ -1,13 +1,15 @@
 import csv
 import requests
+import cloudscraper
 from urllib.request import Request, urlopen
 
 from bs4 import BeautifulSoup
 
-from checkURL import checkURL
+from tools.checkURL import checkURL
 
 def requestAndParse(domain):
     domain = checkURL(domain)
+    scraper = cloudscraper.create_scraper()
     try:
         # define headers to be provided for request authentication
         headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) ' 
@@ -18,7 +20,7 @@ def requestAndParse(domain):
             'Accept-Encoding': 'none',
             'Accept-Language': 'en-US,en;q=0.8',
             'Connection': 'keep-alive'}
-        html = requests.get(url = domain, headers = headers, timeout=10)
+        html = scraper.get(url = domain, headers = headers, timeout=10)
         data = [domain, "HTTP Response:", str(html.status_code)]
         with open('logs/logs.csv', 'a', encoding='UTF8', newline='') as f:
             writer = csv.writer(f)
@@ -33,5 +35,4 @@ def requestAndParse(domain):
             writer = csv.writer(x)
             writer.writerow(data)
         pass
-
 
