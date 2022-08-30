@@ -1,0 +1,1 @@
+"HTTPSConnectionPool(host='silhou.com', port=443): Max retries exceeded with url: / (Caused by SSLError(CertificateError(""hostname 'silhou.com' doesn't match either of '*.myshopify.com', 'myshopify.com'"")))"

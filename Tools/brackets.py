@@ -18,5 +18,7 @@ def GetBracketContent(string, openingbracket, closingbracket ):
             if stack == 0:
                 results.append(string[startIndex:i])
 
-    print(results[0] + closingbracket)
+    return(results[0] + closingbracket)
+
+
 

@@ -16,19 +16,24 @@ def getABTastyScriptSrc(domain):
         
     else:
         print("http initialized")
-        soup = BeautifulSoup(html.text, "html.parser")
-        # Find all script tags
-        for n in soup.find_all('script'):
-            # Check if the src attribute exists, and if it does grab the source URL
-            if 'src' in n.attrs:
-                javascript = n['src']
-            # Otherwise assume that the javascript is contained within the tags
-            else:
-                javascript = ''
-            
-            extracedScript = regex_script(javascript)
-            if extracedScript != None:
-                print("Script found: " + extracedScript)
+
+    
+    extractscript(html)
+
+def extractscript(html):
+    soup = BeautifulSoup(html.text, "html.parser")
+    # Find all script tags
+    for n in soup.find_all('script'):
+        # Check if the src attribute exists, and if it does grab the source URL
+        if 'src' in n.attrs:
+            javascript = n['src']
+        # Otherwise assume that the javascript is contained within the tags
+        else:
+            javascript = ''
+        
+        extracedScript = regex_script(javascript)
+        if extracedScript != None:
+            print("Script found: " + extracedScript)
             
 
             
