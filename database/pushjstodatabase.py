@@ -15,5 +15,8 @@ def pushtodatabase(DatabaseName, NameFirstRow, DataFirstRow, NameSecondRow, Data
     data = supabase.table(DatabaseName).insert({NameFirstRow: DataFirstRow, NameSecondRow: DataSecondRow}).execute()
     assert len(data.data) > 0
 
+def push3itemstodatabase(DatabaseName, NameFirstRow, DataFirstRow, NameSecondRow, DataSecondRow, NameThirdRow, DataThirdRow):
+    data = supabase.table(DatabaseName).insert({NameFirstRow: DataFirstRow, NameSecondRow: DataSecondRow, NameThirdRow: DataThirdRow}).execute()
+    assert len(data.data) > 0
 
 # pushtodatabase("JSLinks", "brand_domain", "https://buah.de", "link_js", "https://u3nqc6abwf.kameleoon.eu/kameleoon.js")

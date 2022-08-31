@@ -1,14 +1,18 @@
-import json, _jsonnet
+import csv
+import itertools
+import json
 import json5
 import re
 
+import _jsonnet
+import demjson
+import json5
 import requests
 from bs4 import BeautifulSoup
-from tools.requestandparse import *
+
+from database.pushjstodatabase import *
 from tools.brackets import *
-import demjson
-
-
+from tools.requestandparse import *
 
 # JSON = re.compile('Kameleoon.Internals = ({.*?}\)\(\));', re.DOTALL)
 KameleoonJSON = re.compile('Kameleoon.Internals = ({.*?),\"Gatherer\":.*}}', re.DOTALL)
@@ -27,7 +31,6 @@ def getABTastyJSON(domain):
     stringmatches = ABTastymatches.group(1)
     abtastystring = GetBracketContent("{" + stringmatches, "{", "}")
     return abtastystring
-
 
 
 
@@ -62,30 +65,71 @@ def getOptimizeJSON(domain):
 
 #not working yet
 def getOptimizelyJSON(domain):
-    Optimizelysoupstr = str(requestAndParse(domain))
-    OptimizelyJSON = re.compile('("layers": \[{.*)', re.DOTALL)
+    Optimizelysoupstr = requests.get(domain).text
+    OptimizelyJSON = re.compile('\"experiments\": \[{.*', re.DOTALL)
     Optimizelymatches = OptimizelyJSON.search(Optimizelysoupstr)
     stringmatches = Optimizelymatches.group(0)
-    append = GetBracketContent("{" + stringmatches, "{", "}")
+    append = GetBracketContent("{{" + "\"" + stringmatches, "{", "}")
+    print(append)
     JsonSoup = json.loads(append)
-    
-    return JsonSoup
+    print(JsonSoup)
 
 
-#print(getOptimizelyJSON("https://cdn.optimizely.com/js/17529800006.js"))
-
-def getkameleoonJSON(domain):
-    Kameleoonsoupstr = str(requestAndParse(domain))
-    KameleoonJSON = re.compile('Kameleoon.Internals = ({.*?),\"Gatherer\":.*}}', re.DOTALL)
-    Kamleoonmatches = KameleoonJSON.search(Kameleoonsoupstr)
-    TwoBrackets= "}}"
-    append = Kamleoonmatches.group(1) + TwoBrackets
-    JsonSoup = json.loads(append)
-    Configuration = JsonSoup["configuration"]
-    Experiments = Configuration["experiments"]
-    return Experiments, domain
+getOptimizelyJSON("https://cdn.optimizely.com/js/19724458180.js")
+# layers\": \[(\{.*)
 
 
-print(getkameleoonJSON("https://fukwt8dait.kameleoon.eu/kameleoon.js")[1] + "is running " + str(len(getkameleoonJSON("https://fukwt8dait.kameleoon.eu/kameleoon.js")[0])) + " experiments right now")
 
-print(getkameleoonJSON("https://fukwt8dait.kameleoon.eu/kameleoon.js")[0])
+
+# print(getOptimizelyJSON("https://cdn.optimizely.com/js/17529800006.js"))
+
+# def getkameleoonJSON(domain):
+#     Kameleoonsoupstr = str(requestAndParse(domain))
+#     KameleoonJSON = re.compile('Kameleoon.Internals = ({.*?),\"Gatherer\":.*}}', re.DOTALL)
+#     Kamleoonmatches = KameleoonJSON.search(Kameleoonsoupstr)
+#     TwoBrackets= "}}"
+#     append = Kamleoonmatches.group(1) + TwoBrackets
+#     JsonSoup = json.loads(append)
+#     Configuration = JsonSoup["configuration"]
+#     Experiments = Configuration["experiments"]
+#     return Experiments, domain
+
+
+# #print(getkameleoonJSON("https://fukwt8dait.kameleoon.eu/kameleoon.js")[1] + "is running " + str(len(getkameleoonJSON("https://fukwt8dait.kameleoon.eu/kameleoon.js")[0])) + " experiments right now")
+
+# # print(getkameleoonJSON("https://fukwt8dait.kameleoon.eu/kameleoon.js")[0])
+
+
+# with open('kameleoonscripts.csv', newline='') as f:
+#     reader = csv.reader(f)
+#     data = list(reader)
+
+
+# CleanedList = list(itertools.chain.from_iterable(data))
+
+# for i in CleanedList:
+
+
+#     domain = getkameleoonJSON(i)[1]
+#     Experiments = getkameleoonJSON(i)[0]
+#     ExperimentIDs = []
+#     TestNames = []
+
+#     def PushExpsIntoSupabase(jsonexp):
+        
+        
+#         for i in range(len(jsonexp)):
+#             push3itemstodatabase("Experiments", "id", jsonexp[i]["id"], "name", jsonexp[i]["name"], "domain", domain)
+#             ExperimentIDs.append(jsonexp[i]["id"])
+#             TestNames.append(jsonexp[i]["name"])
+
+
+        
+
+#     try:
+
+#         PushExpsIntoSupabase(Experiments)
+#         print(i + " successfully executed")
+#     except:
+#         pass
+
