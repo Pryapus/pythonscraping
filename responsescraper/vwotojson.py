@@ -10,7 +10,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from seleniumwire import webdriver
 from seleniumwire.utils import decode
 
-from Tools.brackets import * 
+from tools.brackets import * 
 
 def get_resources(url: str) -> set:
     chrome_options = Options()
