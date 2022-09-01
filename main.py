@@ -1,15 +1,20 @@
 from cgi import print_exception
-from modules.GetScriptSrc import *
+from GetScriptSrc import *
 from database.pushjstodatabase import *
 from database.csvtolist import *
+from database.pushjstodatabase_v2 import updatetodatabase
 
-brandlist = ['https://www.made.com']
+brandlist = ['https://sassyclassy.de']
 
 for x in CleanedList:
     try:
-        pushtodatabase("JSLinks", "brand_domain", x, "link_js", getScriptSrc(x))
+        pushtodatabase("JSLinks_production", "brand_domain", x, "link_js", getScriptSrc(x))
         print(x + " successfully executed")
     except:
+        try:
+            updatetodatabase("JSLinks_production", "brand_domain", x, "link_js", getScriptSrc(x))
+        except:
+            pass
         pass
 
 

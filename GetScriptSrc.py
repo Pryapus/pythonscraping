@@ -38,5 +38,3 @@ def extractFromRegex(regex, javascript):
         result = OptimizelyScript[0]
         return result
     
-
-print(getScriptSrc("https://sassyclassy.de"))

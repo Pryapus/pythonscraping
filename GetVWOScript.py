@@ -10,10 +10,9 @@ def getVWOScriptSrc(soup):
     textsoup = str(soup)
     VWORegex = re.compile(r'_vwo_code.*var account_id=(.{6})', re.DOTALL)
     account_number = VWORegex.findall(textsoup)[0]
-    output = "VWO Account: " + VWORegex.findall(textsoup)[0]
+    output = "https://dev.visualwebsiteoptimizer.com/settings.js?a=" + VWORegex.findall(textsoup)[0]
 
 
-    return output, account_number
+    return output
     
             
-    
