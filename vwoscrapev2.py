@@ -19,7 +19,7 @@ params = {
     'a': '588595',
 }
 
-vwosoupstr = requests.get('https://dev.visualwebsiteoptimizer.com/settings.js', params=params, headers=headers)
+vwosoupstr = requests.get('https://dev.visualwebsiteoptimizer.com/settings.js', params=params)
 VWOJSON = re.compile('\'updateSettings\',(\{.*)', re.DOTALL)
 VWOmatches = VWOJSON.search(vwosoupstr.text)
 stringmatches = VWOmatches.group(0)
@@ -27,10 +27,18 @@ append = GetBracketContent(stringmatches, "{", "}")
 JsonSoup = json.loads("{\"configuration\": " + append + "}")
 #print(range(len((JsonSoup))))
 
-TestNames = []
-
 
 onesity = (JsonSoup["configuration"])
+
+for channel in onesity:
+    ExperimentName = onesity[channel][0]["name"]
+    ExperimentID = channel
+    
+
+
+##for channels in onesity:
+  #  print(channels)
+   # print(onesity[channels]['name'])
 #name = onesity.keys
 #namen = name[0]["name"]
 #for key in onesity.keys():
@@ -38,9 +46,9 @@ onesity = (JsonSoup["configuration"])
 #print(onesity.text)
 
 
-for i in range(len(onesity.keys())):
+#for i in range(len(onesity.keys())):
     #push3itemstodatabase("Experiments", "id", jsonexp[i]["id"], "name", jsonexp[i]["name"], "domain", domain)
     #ExperimentIDs.append(jsonexp[i]["id"])
-    TestNames.append(onesity[i]["name"])
+    #TestNames.append(onesity[i]["name"])
 
-print(TestNames[0])
+#print(TestNames[0])

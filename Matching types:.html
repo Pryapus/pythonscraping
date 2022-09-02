@@ -1,0 +1,42 @@
+Matching types:
+
+thislist = [r'try.abtasty.com\/.*.js', r'cdn.*.optimizely.com\/js\/.*.js', r'googleoptimize\.com\/optimize\.js\?id=.{11}', r'[\w].*kameleoon.js', r'cdn.*.dynamicyield.com\/api\/.*.api_dynamic.js', r'cdn.*.optimizely.com\/js\/.*.js', r'cdn.*.convertexperiments.com\/js\/.*.js']
+
+
+ToDos:
+
+Get rid of the scrip src only
+
+
+in the future, also scrape the tag manager
+VWO:
+<script src="https://dev.visualwebsiteoptimizer.com/lib/355097.js"></script>
+<script src="https://dev.visualwebsiteoptimizer.com/lib/285761.js"></script>
+https://dev.visualwebsiteoptimizer.com/lib/425311.js
+<script src="https://dev.visualwebsiteoptimizer.com/j.php?a=551706&amp;u=https%3A%2F%2Fwww.trypura.com%2F&amp;f=1&amp;r=0.8812589334773553" type="text/javascript"></script>
+<link data-n-head="ssr" data-hid="vwo-async-preload-1" rel="preload" referrerpolicy="no-referrer-when-downgrade" href="https://dev.visualwebsiteoptimizer.com/j.php?a=21388&amp;f=1&amp;pL=1" as="script">
+https://www.brumate.com/ only loads when interactive
+Always get the account ID and go from there
+
+
+
+Optimizely:
+r'cdn.*.optimizely.com\/js\/.*.js'
+<script type="text/javascript" id="optimizely-web-script" src="https://cdn.optimizely.com/js/4566010044.js"></script>
+<link rel="preload" href="//cdn.optimizely.com/js/11423072181.js" as="script"/>
+
+Optimize:
+https://www.google-analytics.com/gtm/optimize.js?id=GTM-P6HSPJG
+
+
+Regexes:
+
+VWO:
+r'visualwebsiteoptimizer\.com\/lib\/([0-9]*)'
+r'visualwebsiteoptimizer\.com\/j\.php\?a=([0-9]*)'
+
+GOptimize:
+optimize\.js\?id=(.{11})
+
+DYO
+r'cdn\.dynamicyield\.com' -> does have DYO but we cannot track it

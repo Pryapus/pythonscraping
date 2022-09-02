@@ -23,8 +23,8 @@ def getScriptSrc(domain):
             # Otherwise assume that the javascript is contained within the tags
             else:
                 javascript = ''
-
-            thislist = [r'try.abtasty.com\/.*.js', r'cdn.*.optimizely.com\/js\/.*.js', r'googleoptimize\.com\/optimize\.js\?id=.{11}', r'[\w].*kameleoon.js', r'cdn.*.dynamicyield.com\/api\/.*.api_dynamic.js', r'cdn.*.optimizely.com\/js\/.*.js', r'cdn.*.convertexperiments.com\/js\/.*.js']
+            print(javascript)
+            thislist = [r'try.abtasty.com\/.*[\d|\w].js', r'cdn.*.optimizely.com\/js\/.*.js', r'googleoptimize\.com\/optimize\.js\?id=.{11}', r'[\w].*kameleoon.js', r'cdn.*.dynamicyield.com\/api\/.*.api_dynamic.js', r'cdn.*.optimizely.com\/js\/.*.js', r'cdn.*.convertexperiments.com\/js\/.*.js']
             for x in thislist:
                 if extractFromRegex(x, javascript):
                     result = extractFromRegex(x, javascript)
@@ -38,3 +38,4 @@ def extractFromRegex(regex, javascript):
         result = OptimizelyScript[0]
         return result
     
+print(getScriptSrc("christ.de"))
